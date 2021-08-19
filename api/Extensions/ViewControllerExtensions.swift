@@ -8,9 +8,9 @@
 import UIKit
 
 extension ViewController {
-
-   @objc func searchButtonPressed() {
-    let alert = UIAlertController(title: "Enter city name", message: nil, preferredStyle: .alert)
+    
+    @objc func searchButtonPressed() {
+        let alert = UIAlertController(title: "Enter city name", message: nil, preferredStyle: .alert)
         alert.addTextField(configurationHandler: { tf in
             let cities = ["Moscow", "Saint Petersburg", "Samara", "Paris"]
             tf.placeholder = cities.randomElement()
@@ -21,7 +21,6 @@ extension ViewController {
             if cityName != "" {
                 let city = cityName.split(separator: " ").joined(separator: "%20")
                 self.networkWeatherManager.fetchCurrentWeather(forRequestType: .cityName(city: city))
-           
             }
         }
         
@@ -29,12 +28,11 @@ extension ViewController {
         
         alert.addAction(search)
         alert.addAction(cancel)
-    
-    present(alert, animated: true)
+        
+        present(alert, animated: true)
     }
     
-//MARK: Setup Constraints for Weather Labels
-    
+    //MARK: Setup Constraints for Weather Labels
     func setupConstraints() {
         backgroundImage.anchor(top: view.topAnchor, bottom: view.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, center: view.centerXAnchor)
         
@@ -101,12 +99,12 @@ extension ViewController {
                             size: .init(width: 80, height: 70),
                             center: nil)
         sunriseLabel.anchor(top: nil,
-                           bottom: nil,
-                           leading: nil,
-                           trailing: nil,
-                           padding: .zero,
-                           size: .zero,
-                           center: sunriseImage.centerXAnchor)
+                            bottom: nil,
+                            leading: nil,
+                            trailing: nil,
+                            padding: .zero,
+                            size: .zero,
+                            center: sunriseImage.centerXAnchor)
         
         
         sunsetImage.anchor(top: nil,
@@ -124,8 +122,7 @@ extension ViewController {
                            size: .zero,
                            center: sunsetImage.centerXAnchor)
         
-//MARK: Create StackView for sunrise and sunset
-        
+        //MARK: Create StackView for sunrise and sunset
         
         let sunriseStackView = UIStackView(arrangedSubviews: [sunriseImage,sunriseLabel])
         self.view.addSubview(sunriseStackView)
@@ -139,7 +136,6 @@ extension ViewController {
         sunriseStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
         sunriseStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         
-
         let sunsetStackView = UIStackView(arrangedSubviews: [sunsetImage,sunsetLabel])
         self.view.addSubview(sunsetStackView)
         sunsetStackView.axis = .vertical
@@ -152,10 +148,5 @@ extension ViewController {
         sunsetStackView.topAnchor.constraint(lessThanOrEqualTo: maxTemperatureLabel.bottomAnchor, constant: 50).isActive = true
         sunsetStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
         sunsetStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-
-    
     }
-    
 }
-
-
